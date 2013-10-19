@@ -1,0 +1,469 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FA87F3C21812E93800BB07AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3C11812E93800BB07AF /* UIKit.framework */; };
+		FA87F3C41812E93800BB07AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3C31812E93800BB07AF /* Foundation.framework */; };
+		FA87F3C61812E93800BB07AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3C51812E93800BB07AF /* CoreGraphics.framework */; };
+		FA87F3CC1812E93800BB07AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA87F3CA1812E93800BB07AF /* InfoPlist.strings */; };
+		FA87F3CE1812E93800BB07AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87F3CD1812E93800BB07AF /* main.m */; };
+		FA87F3D21812E93800BB07AF /* FlightWheelAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87F3D11812E93800BB07AF /* FlightWheelAppDelegate.m */; };
+		FA87F3D41812E93800BB07AF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FA87F3D31812E93800BB07AF /* Default.png */; };
+		FA87F3D61812E93900BB07AF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA87F3D51812E93800BB07AF /* Default@2x.png */; };
+		FA87F3D81812E93900BB07AF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA87F3D71812E93900BB07AF /* Default-568h@2x.png */; };
+		FA87F3DB1812E93900BB07AF /* FlightWheelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87F3DA1812E93900BB07AF /* FlightWheelViewController.m */; };
+		FA87F3DE1812E93900BB07AF /* FlightWheelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA87F3DC1812E93900BB07AF /* FlightWheelViewController.xib */; };
+		FA87F3E61812E93900BB07AF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3E51812E93900BB07AF /* SenTestingKit.framework */; };
+		FA87F3E71812E93900BB07AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3C11812E93800BB07AF /* UIKit.framework */; };
+		FA87F3E81812E93900BB07AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3C31812E93800BB07AF /* Foundation.framework */; };
+		FA87F3F01812E93900BB07AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA87F3EE1812E93900BB07AF /* InfoPlist.strings */; };
+		FA87F3F31812E93900BB07AF /* FlightWheelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87F3F21812E93900BB07AF /* FlightWheelTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FA87F3E91812E93900BB07AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA87F3B61812E93800BB07AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA87F3BD1812E93800BB07AF;
+			remoteInfo = FlightWheel;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FA87F3BE1812E93800BB07AF /* FlightWheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlightWheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA87F3C11812E93800BB07AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FA87F3C31812E93800BB07AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FA87F3C51812E93800BB07AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FA87F3C91812E93800BB07AF /* FlightWheel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlightWheel-Info.plist"; sourceTree = "<group>"; };
+		FA87F3CB1812E93800BB07AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FA87F3CD1812E93800BB07AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FA87F3CF1812E93800BB07AF /* FlightWheel-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlightWheel-Prefix.pch"; sourceTree = "<group>"; };
+		FA87F3D01812E93800BB07AF /* FlightWheelAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlightWheelAppDelegate.h; sourceTree = "<group>"; };
+		FA87F3D11812E93800BB07AF /* FlightWheelAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlightWheelAppDelegate.m; sourceTree = "<group>"; };
+		FA87F3D31812E93800BB07AF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		FA87F3D51812E93800BB07AF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		FA87F3D71812E93900BB07AF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		FA87F3D91812E93900BB07AF /* FlightWheelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlightWheelViewController.h; sourceTree = "<group>"; };
+		FA87F3DA1812E93900BB07AF /* FlightWheelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlightWheelViewController.m; sourceTree = "<group>"; };
+		FA87F3DD1812E93900BB07AF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FlightWheelViewController.xib; sourceTree = "<group>"; };
+		FA87F3E41812E93900BB07AF /* FlightWheelTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlightWheelTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA87F3E51812E93900BB07AF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		FA87F3ED1812E93900BB07AF /* FlightWheelTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlightWheelTests-Info.plist"; sourceTree = "<group>"; };
+		FA87F3EF1812E93900BB07AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FA87F3F11812E93900BB07AF /* FlightWheelTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlightWheelTests.h; sourceTree = "<group>"; };
+		FA87F3F21812E93900BB07AF /* FlightWheelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlightWheelTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FA87F3BB1812E93800BB07AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA87F3C21812E93800BB07AF /* UIKit.framework in Frameworks */,
+				FA87F3C41812E93800BB07AF /* Foundation.framework in Frameworks */,
+				FA87F3C61812E93800BB07AF /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA87F3E01812E93900BB07AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA87F3E61812E93900BB07AF /* SenTestingKit.framework in Frameworks */,
+				FA87F3E71812E93900BB07AF /* UIKit.framework in Frameworks */,
+				FA87F3E81812E93900BB07AF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FA87F3B51812E93800BB07AF = {
+			isa = PBXGroup;
+			children = (
+				FA87F3C71812E93800BB07AF /* FlightWheel */,
+				FA87F3EB1812E93900BB07AF /* FlightWheelTests */,
+				FA87F3C01812E93800BB07AF /* Frameworks */,
+				FA87F3BF1812E93800BB07AF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FA87F3BF1812E93800BB07AF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA87F3BE1812E93800BB07AF /* FlightWheel.app */,
+				FA87F3E41812E93900BB07AF /* FlightWheelTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FA87F3C01812E93800BB07AF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA87F3C11812E93800BB07AF /* UIKit.framework */,
+				FA87F3C31812E93800BB07AF /* Foundation.framework */,
+				FA87F3C51812E93800BB07AF /* CoreGraphics.framework */,
+				FA87F3E51812E93900BB07AF /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA87F3C71812E93800BB07AF /* FlightWheel */ = {
+			isa = PBXGroup;
+			children = (
+				FA87F3D01812E93800BB07AF /* FlightWheelAppDelegate.h */,
+				FA87F3D11812E93800BB07AF /* FlightWheelAppDelegate.m */,
+				FA87F3D91812E93900BB07AF /* FlightWheelViewController.h */,
+				FA87F3DA1812E93900BB07AF /* FlightWheelViewController.m */,
+				FA87F3DC1812E93900BB07AF /* FlightWheelViewController.xib */,
+				FA87F3C81812E93800BB07AF /* Supporting Files */,
+			);
+			path = FlightWheel;
+			sourceTree = "<group>";
+		};
+		FA87F3C81812E93800BB07AF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA87F3C91812E93800BB07AF /* FlightWheel-Info.plist */,
+				FA87F3CA1812E93800BB07AF /* InfoPlist.strings */,
+				FA87F3CD1812E93800BB07AF /* main.m */,
+				FA87F3CF1812E93800BB07AF /* FlightWheel-Prefix.pch */,
+				FA87F3D31812E93800BB07AF /* Default.png */,
+				FA87F3D51812E93800BB07AF /* Default@2x.png */,
+				FA87F3D71812E93900BB07AF /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA87F3EB1812E93900BB07AF /* FlightWheelTests */ = {
+			isa = PBXGroup;
+			children = (
+				FA87F3F11812E93900BB07AF /* FlightWheelTests.h */,
+				FA87F3F21812E93900BB07AF /* FlightWheelTests.m */,
+				FA87F3EC1812E93900BB07AF /* Supporting Files */,
+			);
+			path = FlightWheelTests;
+			sourceTree = "<group>";
+		};
+		FA87F3EC1812E93900BB07AF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA87F3ED1812E93900BB07AF /* FlightWheelTests-Info.plist */,
+				FA87F3EE1812E93900BB07AF /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FA87F3BD1812E93800BB07AF /* FlightWheel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA87F3F61812E93900BB07AF /* Build configuration list for PBXNativeTarget "FlightWheel" */;
+			buildPhases = (
+				FA87F3BA1812E93800BB07AF /* Sources */,
+				FA87F3BB1812E93800BB07AF /* Frameworks */,
+				FA87F3BC1812E93800BB07AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FlightWheel;
+			productName = FlightWheel;
+			productReference = FA87F3BE1812E93800BB07AF /* FlightWheel.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FA87F3E31812E93900BB07AF /* FlightWheelTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA87F3F91812E93900BB07AF /* Build configuration list for PBXNativeTarget "FlightWheelTests" */;
+			buildPhases = (
+				FA87F3DF1812E93900BB07AF /* Sources */,
+				FA87F3E01812E93900BB07AF /* Frameworks */,
+				FA87F3E11812E93900BB07AF /* Resources */,
+				FA87F3E21812E93900BB07AF /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA87F3EA1812E93900BB07AF /* PBXTargetDependency */,
+			);
+			name = FlightWheelTests;
+			productName = FlightWheelTests;
+			productReference = FA87F3E41812E93900BB07AF /* FlightWheelTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FA87F3B61812E93800BB07AF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = FlightWheel;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Yuya Tanaka";
+			};
+			buildConfigurationList = FA87F3B91812E93800BB07AF /* Build configuration list for PBXProject "FlightWheel" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FA87F3B51812E93800BB07AF;
+			productRefGroup = FA87F3BF1812E93800BB07AF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FA87F3BD1812E93800BB07AF /* FlightWheel */,
+				FA87F3E31812E93900BB07AF /* FlightWheelTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FA87F3BC1812E93800BB07AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA87F3CC1812E93800BB07AF /* InfoPlist.strings in Resources */,
+				FA87F3D41812E93800BB07AF /* Default.png in Resources */,
+				FA87F3D61812E93900BB07AF /* Default@2x.png in Resources */,
+				FA87F3D81812E93900BB07AF /* Default-568h@2x.png in Resources */,
+				FA87F3DE1812E93900BB07AF /* FlightWheelViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA87F3E11812E93900BB07AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA87F3F01812E93900BB07AF /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FA87F3E21812E93900BB07AF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FA87F3BA1812E93800BB07AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA87F3CE1812E93800BB07AF /* main.m in Sources */,
+				FA87F3D21812E93800BB07AF /* FlightWheelAppDelegate.m in Sources */,
+				FA87F3DB1812E93900BB07AF /* FlightWheelViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA87F3DF1812E93900BB07AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA87F3F31812E93900BB07AF /* FlightWheelTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FA87F3EA1812E93900BB07AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA87F3BD1812E93800BB07AF /* FlightWheel */;
+			targetProxy = FA87F3E91812E93900BB07AF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FA87F3CA1812E93800BB07AF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA87F3CB1812E93800BB07AF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FA87F3DC1812E93900BB07AF /* FlightWheelViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA87F3DD1812E93900BB07AF /* en */,
+			);
+			name = FlightWheelViewController.xib;
+			sourceTree = "<group>";
+		};
+		FA87F3EE1812E93900BB07AF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA87F3EF1812E93900BB07AF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FA87F3F41812E93900BB07AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FA87F3F51812E93900BB07AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FA87F3F71812E93900BB07AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlightWheel/FlightWheel-Prefix.pch";
+				INFOPLIST_FILE = "FlightWheel/FlightWheel-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FA87F3F81812E93900BB07AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlightWheel/FlightWheel-Prefix.pch";
+				INFOPLIST_FILE = "FlightWheel/FlightWheel-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		FA87F3FA1812E93900BB07AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FlightWheel.app/FlightWheel";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlightWheel/FlightWheel-Prefix.pch";
+				INFOPLIST_FILE = "FlightWheelTests/FlightWheelTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		FA87F3FB1812E93900BB07AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FlightWheel.app/FlightWheel";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlightWheel/FlightWheel-Prefix.pch";
+				INFOPLIST_FILE = "FlightWheelTests/FlightWheelTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FA87F3B91812E93800BB07AF /* Build configuration list for PBXProject "FlightWheel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA87F3F41812E93900BB07AF /* Debug */,
+				FA87F3F51812E93900BB07AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA87F3F61812E93900BB07AF /* Build configuration list for PBXNativeTarget "FlightWheel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA87F3F71812E93900BB07AF /* Debug */,
+				FA87F3F81812E93900BB07AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FA87F3F91812E93900BB07AF /* Build configuration list for PBXNativeTarget "FlightWheelTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA87F3FA1812E93900BB07AF /* Debug */,
+				FA87F3FB1812E93900BB07AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FA87F3B61812E93800BB07AF /* Project object */;
+}
