@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		112DA7B7C8A048E297B45E69 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE84C55256D64587A6534247 /* libPods.a */; };
+		99E531B0D1D844EF8A22B444 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE84C55256D64587A6534247 /* libPods.a */; };
+		FA57F54418144C3300737C61 /* FGFSPropertyTreeClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FA57F54318144C3300737C61 /* FGFSPropertyTreeClient.m */; };
+		FA5F60D7185CBE85000AF631 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA5F60B9185CACF7000AF631 /* XCTest.framework */; };
+		FA5F60D8185CBE85000AF631 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3C31812E93800BB07AF /* Foundation.framework */; };
+		FA5F60D9185CBE85000AF631 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3C11812E93800BB07AF /* UIKit.framework */; };
+		FA5F60DF185CBE85000AF631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA5F60DD185CBE85000AF631 /* InfoPlist.strings */; };
+		FA5F60E8185CBEA3000AF631 /* FGFSPropertyTreeClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5A7EDA181BEEAC0015B3CB /* FGFSPropertyTreeClientTests.m */; };
 		FA87F3C21812E93800BB07AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3C11812E93800BB07AF /* UIKit.framework */; };
 		FA87F3C41812E93800BB07AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3C31812E93800BB07AF /* Foundation.framework */; };
 		FA87F3C61812E93800BB07AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3C51812E93800BB07AF /* CoreGraphics.framework */; };
@@ -18,15 +26,10 @@
 		FA87F3D81812E93900BB07AF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA87F3D71812E93900BB07AF /* Default-568h@2x.png */; };
 		FA87F3DB1812E93900BB07AF /* FlightWheelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87F3DA1812E93900BB07AF /* FlightWheelViewController.m */; };
 		FA87F3DE1812E93900BB07AF /* FlightWheelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA87F3DC1812E93900BB07AF /* FlightWheelViewController.xib */; };
-		FA87F3E61812E93900BB07AF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3E51812E93900BB07AF /* SenTestingKit.framework */; };
-		FA87F3E71812E93900BB07AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3C11812E93800BB07AF /* UIKit.framework */; };
-		FA87F3E81812E93900BB07AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA87F3C31812E93800BB07AF /* Foundation.framework */; };
-		FA87F3F01812E93900BB07AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA87F3EE1812E93900BB07AF /* InfoPlist.strings */; };
-		FA87F3F31812E93900BB07AF /* FlightWheelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87F3F21812E93900BB07AF /* FlightWheelTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		FA87F3E91812E93900BB07AF /* PBXContainerItemProxy */ = {
+		FA5F60E3185CBE85000AF631 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FA87F3B61812E93800BB07AF /* Project object */;
 			proxyType = 1;
@@ -36,6 +39,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AE84C55256D64587A6534247 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3F5C1A25F8341BF8984245B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		FA57F54218144C3300737C61 /* FGFSPropertyTreeClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGFSPropertyTreeClient.h; sourceTree = "<group>"; };
+		FA57F54318144C3300737C61 /* FGFSPropertyTreeClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGFSPropertyTreeClient.m; sourceTree = "<group>"; };
+		FA5A7EDA181BEEAC0015B3CB /* FGFSPropertyTreeClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FGFSPropertyTreeClientTests.m; path = FlightWheelTests/FGFSPropertyTreeClientTests.m; sourceTree = SOURCE_ROOT; };
+		FA5A7EDC181BF1DE0015B3CB /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		FA5F60B9185CACF7000AF631 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		FA5F60D6185CBE85000AF631 /* FlightWheelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlightWheelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA5F60DC185CBE85000AF631 /* FlightWheelTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlightWheelTests-Info.plist"; sourceTree = "<group>"; };
+		FA5F60DE185CBE85000AF631 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FA5F60E2185CBE85000AF631 /* FlightWheelTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlightWheelTests-Prefix.pch"; sourceTree = "<group>"; };
 		FA87F3BE1812E93800BB07AF /* FlightWheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlightWheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA87F3C11812E93800BB07AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FA87F3C31812E93800BB07AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -52,15 +66,20 @@
 		FA87F3D91812E93900BB07AF /* FlightWheelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlightWheelViewController.h; sourceTree = "<group>"; };
 		FA87F3DA1812E93900BB07AF /* FlightWheelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlightWheelViewController.m; sourceTree = "<group>"; };
 		FA87F3DD1812E93900BB07AF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FlightWheelViewController.xib; sourceTree = "<group>"; };
-		FA87F3E41812E93900BB07AF /* FlightWheelTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlightWheelTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA87F3E51812E93900BB07AF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		FA87F3ED1812E93900BB07AF /* FlightWheelTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlightWheelTests-Info.plist"; sourceTree = "<group>"; };
-		FA87F3EF1812E93900BB07AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		FA87F3F11812E93900BB07AF /* FlightWheelTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlightWheelTests.h; sourceTree = "<group>"; };
-		FA87F3F21812E93900BB07AF /* FlightWheelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlightWheelTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FA5F60D3185CBE85000AF631 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA5F60D7185CBE85000AF631 /* XCTest.framework in Frameworks */,
+				FA5F60D9185CBE85000AF631 /* UIKit.framework in Frameworks */,
+				FA5F60D8185CBE85000AF631 /* Foundation.framework in Frameworks */,
+				99E531B0D1D844EF8A22B444 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA87F3BB1812E93800BB07AF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -68,29 +87,40 @@
 				FA87F3C21812E93800BB07AF /* UIKit.framework in Frameworks */,
 				FA87F3C41812E93800BB07AF /* Foundation.framework in Frameworks */,
 				FA87F3C61812E93800BB07AF /* CoreGraphics.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FA87F3E01812E93900BB07AF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FA87F3E61812E93900BB07AF /* SenTestingKit.framework in Frameworks */,
-				FA87F3E71812E93900BB07AF /* UIKit.framework in Frameworks */,
-				FA87F3E81812E93900BB07AF /* Foundation.framework in Frameworks */,
+				112DA7B7C8A048E297B45E69 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA5F60DA185CBE85000AF631 /* FlightWheelTests */ = {
+			isa = PBXGroup;
+			children = (
+				FA5A7EDA181BEEAC0015B3CB /* FGFSPropertyTreeClientTests.m */,
+				FA5F60DB185CBE85000AF631 /* Supporting Files */,
+			);
+			path = FlightWheelTests;
+			sourceTree = "<group>";
+		};
+		FA5F60DB185CBE85000AF631 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA5F60DC185CBE85000AF631 /* FlightWheelTests-Info.plist */,
+				FA5F60DD185CBE85000AF631 /* InfoPlist.strings */,
+				FA5F60E2185CBE85000AF631 /* FlightWheelTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		FA87F3B51812E93800BB07AF = {
 			isa = PBXGroup;
 			children = (
 				FA87F3C71812E93800BB07AF /* FlightWheel */,
-				FA87F3EB1812E93900BB07AF /* FlightWheelTests */,
+				FA5F60DA185CBE85000AF631 /* FlightWheelTests */,
 				FA87F3C01812E93800BB07AF /* Frameworks */,
 				FA87F3BF1812E93800BB07AF /* Products */,
+				C3F5C1A25F8341BF8984245B /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,7 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				FA87F3BE1812E93800BB07AF /* FlightWheel.app */,
-				FA87F3E41812E93900BB07AF /* FlightWheelTests.octest */,
+				FA5F60D6185CBE85000AF631 /* FlightWheelTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,10 +136,12 @@
 		FA87F3C01812E93800BB07AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA5F60B9185CACF7000AF631 /* XCTest.framework */,
+				FA5A7EDC181BF1DE0015B3CB /* libPods.a */,
 				FA87F3C11812E93800BB07AF /* UIKit.framework */,
 				FA87F3C31812E93800BB07AF /* Foundation.framework */,
 				FA87F3C51812E93800BB07AF /* CoreGraphics.framework */,
-				FA87F3E51812E93900BB07AF /* SenTestingKit.framework */,
+				AE84C55256D64587A6534247 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -123,6 +155,8 @@
 				FA87F3DA1812E93900BB07AF /* FlightWheelViewController.m */,
 				FA87F3DC1812E93900BB07AF /* FlightWheelViewController.xib */,
 				FA87F3C81812E93800BB07AF /* Supporting Files */,
+				FA57F54218144C3300737C61 /* FGFSPropertyTreeClient.h */,
+				FA57F54318144C3300737C61 /* FGFSPropertyTreeClient.m */,
 			);
 			path = FlightWheel;
 			sourceTree = "<group>";
@@ -141,35 +175,38 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		FA87F3EB1812E93900BB07AF /* FlightWheelTests */ = {
-			isa = PBXGroup;
-			children = (
-				FA87F3F11812E93900BB07AF /* FlightWheelTests.h */,
-				FA87F3F21812E93900BB07AF /* FlightWheelTests.m */,
-				FA87F3EC1812E93900BB07AF /* Supporting Files */,
-			);
-			path = FlightWheelTests;
-			sourceTree = "<group>";
-		};
-		FA87F3EC1812E93900BB07AF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				FA87F3ED1812E93900BB07AF /* FlightWheelTests-Info.plist */,
-				FA87F3EE1812E93900BB07AF /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FA5F60D5185CBE85000AF631 /* FlightWheelTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA5F60E5185CBE85000AF631 /* Build configuration list for PBXNativeTarget "FlightWheelTests" */;
+			buildPhases = (
+				F47633550556450BB44D01C0 /* Check Pods Manifest.lock */,
+				FA5F60D2185CBE85000AF631 /* Sources */,
+				FA5F60D3185CBE85000AF631 /* Frameworks */,
+				FA5F60D4185CBE85000AF631 /* Resources */,
+				B004BCEC0A404B65B024958A /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA5F60E4185CBE85000AF631 /* PBXTargetDependency */,
+			);
+			name = FlightWheelTests;
+			productName = FlightWheelTests;
+			productReference = FA5F60D6185CBE85000AF631 /* FlightWheelTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		FA87F3BD1812E93800BB07AF /* FlightWheel */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA87F3F61812E93900BB07AF /* Build configuration list for PBXNativeTarget "FlightWheel" */;
 			buildPhases = (
+				E80D982C2D4048C59E257868 /* Check Pods Manifest.lock */,
 				FA87F3BA1812E93800BB07AF /* Sources */,
 				FA87F3BB1812E93800BB07AF /* Frameworks */,
 				FA87F3BC1812E93800BB07AF /* Resources */,
+				607DC5288A054F23B61BBC23 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -180,25 +217,6 @@
 			productReference = FA87F3BE1812E93800BB07AF /* FlightWheel.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FA87F3E31812E93900BB07AF /* FlightWheelTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FA87F3F91812E93900BB07AF /* Build configuration list for PBXNativeTarget "FlightWheelTests" */;
-			buildPhases = (
-				FA87F3DF1812E93900BB07AF /* Sources */,
-				FA87F3E01812E93900BB07AF /* Frameworks */,
-				FA87F3E11812E93900BB07AF /* Resources */,
-				FA87F3E21812E93900BB07AF /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FA87F3EA1812E93900BB07AF /* PBXTargetDependency */,
-			);
-			name = FlightWheelTests;
-			productName = FlightWheelTests;
-			productReference = FA87F3E41812E93900BB07AF /* FlightWheelTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -206,8 +224,13 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = FlightWheel;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Yuya Tanaka";
+				TargetAttributes = {
+					FA5F60D5185CBE85000AF631 = {
+						TestTargetID = FA87F3BD1812E93800BB07AF;
+					};
+				};
 			};
 			buildConfigurationList = FA87F3B91812E93800BB07AF /* Build configuration list for PBXProject "FlightWheel" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -222,12 +245,20 @@
 			projectRoot = "";
 			targets = (
 				FA87F3BD1812E93800BB07AF /* FlightWheel */,
-				FA87F3E31812E93900BB07AF /* FlightWheelTests */,
+				FA5F60D5185CBE85000AF631 /* FlightWheelTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FA5F60D4185CBE85000AF631 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA5F60DF185CBE85000AF631 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA87F3BC1812E93800BB07AF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -240,33 +271,80 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FA87F3E11812E93900BB07AF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FA87F3F01812E93900BB07AF /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		FA87F3E21812E93900BB07AF /* ShellScript */ = {
+		607DC5288A054F23B61BBC23 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B004BCEC0A404B65B024958A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E80D982C2D4048C59E257868 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F47633550556450BB44D01C0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FA5F60D2185CBE85000AF631 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA5F60E8185CBEA3000AF631 /* FGFSPropertyTreeClientTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA87F3BA1812E93800BB07AF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -274,28 +352,29 @@
 				FA87F3CE1812E93800BB07AF /* main.m in Sources */,
 				FA87F3D21812E93800BB07AF /* FlightWheelAppDelegate.m in Sources */,
 				FA87F3DB1812E93900BB07AF /* FlightWheelViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FA87F3DF1812E93900BB07AF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FA87F3F31812E93900BB07AF /* FlightWheelTests.m in Sources */,
+				FA57F54418144C3300737C61 /* FGFSPropertyTreeClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		FA87F3EA1812E93900BB07AF /* PBXTargetDependency */ = {
+		FA5F60E4185CBE85000AF631 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FA87F3BD1812E93800BB07AF /* FlightWheel */;
-			targetProxy = FA87F3E91812E93900BB07AF /* PBXContainerItemProxy */;
+			targetProxy = FA5F60E3185CBE85000AF631 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		FA5F60DD185CBE85000AF631 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA5F60DE185CBE85000AF631 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		FA87F3CA1812E93800BB07AF /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -312,17 +391,70 @@
 			name = FlightWheelViewController.xib;
 			sourceTree = "<group>";
 		};
-		FA87F3EE1812E93900BB07AF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FA87F3EF1812E93900BB07AF /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		FA5F60E6185CBE85000AF631 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3F5C1A25F8341BF8984245B /* Pods.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FlightWheel.app/FlightWheel";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlightWheelTests/FlightWheelTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "FlightWheelTests/FlightWheelTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		FA5F60E7185CBE85000AF631 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3F5C1A25F8341BF8984245B /* Pods.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FlightWheel.app/FlightWheel";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlightWheelTests/FlightWheelTests-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "FlightWheelTests/FlightWheelTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		FA87F3F41812E93900BB07AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -381,7 +513,12 @@
 		};
 		FA87F3F71812E93900BB07AF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3F5C1A25F8341BF8984245B /* Pods.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlightWheel/FlightWheel-Prefix.pch";
 				INFOPLIST_FILE = "FlightWheel/FlightWheel-Info.plist";
@@ -392,7 +529,12 @@
 		};
 		FA87F3F81812E93900BB07AF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3F5C1A25F8341BF8984245B /* Pods.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlightWheel/FlightWheel-Prefix.pch";
 				INFOPLIST_FILE = "FlightWheel/FlightWheel-Info.plist";
@@ -401,43 +543,18 @@
 			};
 			name = Release;
 		};
-		FA87F3FA1812E93900BB07AF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FlightWheel.app/FlightWheel";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FlightWheel/FlightWheel-Prefix.pch";
-				INFOPLIST_FILE = "FlightWheelTests/FlightWheelTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		FA87F3FB1812E93900BB07AF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FlightWheel.app/FlightWheel";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FlightWheel/FlightWheel-Prefix.pch";
-				INFOPLIST_FILE = "FlightWheelTests/FlightWheelTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FA5F60E5185CBE85000AF631 /* Build configuration list for PBXNativeTarget "FlightWheelTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA5F60E6185CBE85000AF631 /* Debug */,
+				FA5F60E7185CBE85000AF631 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FA87F3B91812E93800BB07AF /* Build configuration list for PBXProject "FlightWheel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -454,14 +571,7 @@
 				FA87F3F81812E93900BB07AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		FA87F3F91812E93900BB07AF /* Build configuration list for PBXNativeTarget "FlightWheelTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FA87F3FA1812E93900BB07AF /* Debug */,
-				FA87F3FB1812E93900BB07AF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
