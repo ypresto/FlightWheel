@@ -21,20 +21,12 @@ typedef enum ReceiveDataTypeTag : char {
 @implementation FGFSPropertyTreeClient
 {
     CHCircularBufferQueue *queue;
+    BOOL isReady;
 }
 
 static const NSTimeInterval kSocketTimeout = 3.0;
 static const NSUInteger kSocketMaxLength = 102400u;
 static const NSUInteger kQueueCapacity = 4096u;
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        queue = [[CHCircularBufferQueue alloc] initWithCapacity:kQueueCapacity];
-    }
-    return self;
-}
 
 - (void)bindToHost:(NSString *)host onPort:(uint16_t)port
 {
@@ -53,7 +45,8 @@ static const NSUInteger kQueueCapacity = 4096u;
 {
     [_socket disconnect];
     _socket = nil;
-    [queue removeAllObjects];
+    queue = nil;
+    isReady = NO;
 }
 
 - (void)requestStringValueForKey:(NSString *)key
@@ -83,8 +76,10 @@ static const NSUInteger kQueueCapacity = 4096u;
 
 - (void)requestValueForKey:(NSString *)key receiveDataType:(ReceiveDataType)receiveDataType
 {
-    NSData *dataToSend = [[NSString stringWithFormat:@"get %@\r\n", key] dataUsingEncoding:NSUTF8StringEncoding];
-    [_socket writeData:dataToSend withTimeout:3 tag:0];
+    if (!isReady) return;
+
+    NSData *data = [[NSString stringWithFormat:@"get %@\r\n", key] dataUsingEncoding:NSUTF8StringEncoding];
+    [_socket writeData:data withTimeout:3 tag:0];
 
     [queue addObject:key];
     [_socket readDataToData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:kSocketTimeout maxLength:kSocketMaxLength tag:receiveDataType];
@@ -92,6 +87,8 @@ static const NSUInteger kQueueCapacity = 4096u;
 
 - (void)writeStringValue:(NSString *)stringValue forKey:(NSString *)key
 {
+    if (!isReady) return;
+
     // typedef simgear::PropertyObject<std::string> SGPropObjString;
     NSData *data = [[NSString stringWithFormat:@"set %@ %@\r\n", key, stringValue] dataUsingEncoding:NSUTF8StringEncoding];
     [_socket writeData:data withTimeout:kSocketTimeout tag:0];
@@ -125,7 +122,10 @@ static const NSUInteger kQueueCapacity = 4096u;
 {
     if (sock != _socket) return;
 
-    [_socket writeData:[@"data\r\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
+    [_socket writeData:[@"data\r\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:kSocketTimeout tag:0];
+    queue = [[CHCircularBufferQueue alloc] initWithCapacity:kQueueCapacity];
+    isReady = YES;
+
     [_delegate propertyTreeClient:self didBindToHost:_socket.connectedHost onPort:_socket.connectedPort];
 }
 
