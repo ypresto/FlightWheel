@@ -9,20 +9,10 @@
 #import "FlightWheelViewController.h"
 
 #import "FGFSPropertyTreeClient.h"
+#import <CoreMotion/CoreMotion.h>
 
-@interface FlightWheelViewController () <FGFSPropertyTreeClientDelegate, UITextFieldDelegate>
+@interface FlightWheelViewController () <FGFSPropertyTreeClientDelegate, UITextFieldDelegate, UIAccelerometerDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *hostText;
-@property (weak, nonatomic) IBOutlet UISwitch *gearSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *brakeSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *parkingBrakeSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *reverserSwitch;
-@property (weak, nonatomic) IBOutlet UISlider *throttleSlider;
-@property (weak, nonatomic) IBOutlet UISlider *flapsSlider;
-@property (weak, nonatomic) IBOutlet UIView *throttleSliderContainer;
-
-@property (nonatomic) FGFSPropertyTreeClient *client;
-@property (nonatomic, readonly) NSRegularExpression *regexForFlapsSettings;
 @property (nonatomic) BOOL flapsSettingsRetrieved;
 @property (nonatomic) BOOL flapsPositionRetrieved;
 
@@ -30,7 +20,24 @@
 
 @implementation FlightWheelViewController
 {
+    __weak IBOutlet UITextField *hostText;
+    __weak IBOutlet UISwitch *gearSwitch;
+    __weak IBOutlet UISwitch *brakeSwitch;
+    __weak IBOutlet UISwitch *parkingBrakeSwitch;
+    __weak IBOutlet UISwitch *reverserSwitch;
+    __weak IBOutlet UISlider *throttleSlider;
+    __weak IBOutlet UISlider *flapsSlider;
+    __weak IBOutlet UIView *throttleSliderContainer;
+    __weak IBOutlet UIProgressView *alieronMeter;
+    __weak IBOutlet UIProgressView *elevatorMeter;
+    
+    FGFSPropertyTreeClient *client;
     NSMutableDictionary *flapsSettings;
+    CMMotionManager *motionManager;
+    double rollCalibrate;
+    double pitchCalibrate;
+    float elevatorSensitivity;
+    float alieronSensitivity;
 }
 
 static const NSInteger kDefaultPort = 65535;
@@ -42,6 +49,8 @@ static NSString *const kTreeKeyForFirstThrottle = @"/controls/engines/engine/thr
 static NSString *const kTreeKeyForFirstReverser = @"/controls/engines/engine/reverser";
 static NSString *const kTreeKeyFormatForThrottle = @"/controls/engines/engine[%d]/throttle";
 static NSString *const kTreeKeyFormatForReverser = @"/controls/engines/engine[%d]/reverser";
+static NSString *const kTreeKeyForAileron = @"/controls/flight/aileron";
+static NSString *const kTreeKeyForElevator = @"/controls/flight/elevator";
 static NSString *const kTreeKeyForFlaps = @"/controls/flight/flaps";
 static NSString *const kTreeKeyForCurrentFlapsPosition = @"/sim/flaps/current-setting";
 static NSString *const kTreeKeyFormatForFlapsSettings = @"/sim/flaps/setting[%d]";
@@ -49,59 +58,79 @@ static NSString *const kTreeKeyPatternForFlapsSettings = @"/sim/flaps/setting\\[
 static const NSInteger kNumberOfEngines = 4;
 static const NSInteger kNumberOfFlapsPositions = 7;
 
+static NSRegularExpression *regexForFlapsSettings;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    _client = [FGFSPropertyTreeClient new];
-    _client.delegate = self;
-    _hostText.delegate = self;
+    [self setupRegexForFlapsSettings];
+    elevatorSensitivity = 2.0f;
+    alieronSensitivity = 1.0f;
 
-    _flapsSlider.maximumValue = kNumberOfFlapsPositions - 1;
+    client = [FGFSPropertyTreeClient new];
+    client.delegate = self;
+    hostText.delegate = self;
 
-    _throttleSliderContainer.transform = CGAffineTransformMakeRotation(-M_PI_2);
-    _flapsSlider.transform = CGAffineTransformMakeRotation(M_PI);
+    flapsSlider.maximumValue = kNumberOfFlapsPositions - 1;
+
+    throttleSliderContainer.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    flapsSlider.transform = CGAffineTransformMakeRotation(M_PI);
+
+    motionManager = [CMMotionManager new];
+    [motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
+        double elevator = -(motion.attitude.roll - rollCalibrate) / M_PI;
+        if (elevator > 1.0) elevator -=2.0; else if (elevator < -1.0) elevator += 2.0;
+        elevator = MAX(MIN(elevator * elevatorSensitivity, 1.0), -1.0);
+        double alieron = -(motion.attitude.pitch - pitchCalibrate) / M_PI_2;
+        if (alieron > 1.0) alieron -=2.0; else if (alieron < -1.0) alieron += 2.0;
+        alieron = MAX(MIN(alieron * alieronSensitivity, 1.0), -1.0);
+        elevatorMeter.progress = (elevator + 1.0) / 2.0;
+        alieronMeter.progress = (alieron + 1.0) / 2.0;
+        [client writeDoubleValue:alieron forKey:kTreeKeyForAileron];
+        [client writeDoubleValue:elevator forKey:kTreeKeyForElevator];
+    }];
+}
+
+- (void)setupRegexForFlapsSettings
+{
+    if (regexForFlapsSettings) return;
+    NSError *error;
+    regexForFlapsSettings = [NSRegularExpression regularExpressionWithPattern:kTreeKeyPatternForFlapsSettings options:0 error:&error];
+    assert(!error);
 }
 
 - (void)requestFlapsSettings
 {
-    _flapsSlider.enabled = NO;
+    flapsSlider.enabled = NO;
     flapsSettings = [NSMutableDictionary dictionaryWithCapacity:kNumberOfFlapsPositions];
     for (int i = 0; i < kNumberOfFlapsPositions; i++) {
-        [_client requestDoubleValueForKey:[NSString stringWithFormat:kTreeKeyFormatForFlapsSettings, i]];
+        [client requestDoubleValueForKey:[NSString stringWithFormat:kTreeKeyFormatForFlapsSettings, i]];
     }
 }
 
 - (void)requestInitialValues
 {
-    _gearSwitch.enabled = NO;
-    _brakeSwitch.enabled = NO;
-    _parkingBrakeSwitch.enabled = NO;
-    _throttleSlider.enabled = NO;
-    _reverserSwitch.enabled = NO;
-    _flapsSlider.enabled = NO;
-    [_client requestBoolValueForKey:kTreeKeyForGear];
-    [_client requestBoolValueForKey:kTreeKeyForBrakeLeft];
-    [_client requestBoolValueForKey:kTreeKeyForBrakeParking];
-    [_client requestDoubleValueForKey:kTreeKeyForFirstThrottle];
-    [_client requestBoolValueForKey:kTreeKeyForFirstReverser];
-    [_client requestIntValueForKey:kTreeKeyForCurrentFlapsPosition];
+    gearSwitch.enabled = NO;
+    brakeSwitch.enabled = NO;
+    parkingBrakeSwitch.enabled = NO;
+    throttleSlider.enabled = NO;
+    reverserSwitch.enabled = NO;
+    flapsSlider.enabled = NO;
+    [client requestBoolValueForKey:kTreeKeyForGear];
+    [client requestBoolValueForKey:kTreeKeyForBrakeLeft];
+    [client requestBoolValueForKey:kTreeKeyForBrakeParking];
+    [client requestDoubleValueForKey:kTreeKeyForFirstThrottle];
+    [client requestBoolValueForKey:kTreeKeyForFirstReverser];
+    [client requestIntValueForKey:kTreeKeyForCurrentFlapsPosition];
 }
 
 - (void)updateFlapsSliderEnabled
 {
-    _flapsSlider.enabled = _flapsPositionRetrieved && _flapsSettingsRetrieved;
+    flapsSlider.enabled = _flapsPositionRetrieved && _flapsSettingsRetrieved;
 }
 
 #pragma mark Custom getter/setter
-
-- (NSRegularExpression *)regexForFlapsSettings
-{
-    NSError *error;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:kTreeKeyPatternForFlapsSettings options:0 error:&error];
-    assert(!error);
-    return regex;
-}
 
 - (void)setFlapsSettingsRetrieved:(BOOL)flapsSettingsRetrieved
 {
@@ -117,15 +146,21 @@ static const NSInteger kNumberOfFlapsPositions = 7;
 
 #pragma mark IBAction
 
+- (IBAction)calibrateTapped:(UIButton *)sender {
+    CMDeviceMotion *motion = motionManager.deviceMotion;
+    rollCalibrate = motion.attitude.roll;
+    pitchCalibrate = motion.attitude.pitch;
+}
+
 - (IBAction)throttleChanged:(UISlider *)sender {
     for (int i = 0; i < kNumberOfEngines; i++) {
-        [_client writeDoubleValue:sender.value forKey:[NSString stringWithFormat:kTreeKeyFormatForThrottle, i]];
+        [client writeDoubleValue:sender.value forKey:[NSString stringWithFormat:kTreeKeyFormatForThrottle, i]];
     }
 }
 
 - (IBAction)reverserChanged:(UISwitch *)sender {
     for (int i = 0; i < kNumberOfEngines; i++) {
-        [_client writeBoolValue:sender.isOn forKey:[NSString stringWithFormat:kTreeKeyFormatForReverser, i]];
+        [client writeBoolValue:sender.isOn forKey:[NSString stringWithFormat:kTreeKeyFormatForReverser, i]];
     }
 }
 
@@ -133,29 +168,29 @@ static const NSInteger kNumberOfFlapsPositions = 7;
     int flapsPosition = roundf(sender.value);
     sender.value = flapsPosition;
     double flapsSetting = [[flapsSettings objectForKey:[NSNumber numberWithInt:flapsPosition]] doubleValue];
-    [_client writeDoubleValue:flapsSetting forKey:kTreeKeyForFlaps];
-    [_client writeIntValue:flapsPosition forKey:kTreeKeyForCurrentFlapsPosition];
+    [client writeDoubleValue:flapsSetting forKey:kTreeKeyForFlaps];
+    [client writeIntValue:flapsPosition forKey:kTreeKeyForCurrentFlapsPosition];
 }
 
 - (IBAction)gearChanged:(UISwitch *)sender {
-    [_client writeBoolValue:sender.isOn forKey:kTreeKeyForGear];
+    [client writeBoolValue:sender.isOn forKey:kTreeKeyForGear];
 }
 
 - (IBAction)brakeChanged:(UISwitch *)sender {
-    [_client writeBoolValue:sender.isOn forKey:kTreeKeyForBrakeLeft];
-    [_client writeBoolValue:sender.isOn forKey:kTreeKeyForBrakeRight];
+    [client writeBoolValue:sender.isOn forKey:kTreeKeyForBrakeLeft];
+    [client writeBoolValue:sender.isOn forKey:kTreeKeyForBrakeRight];
 }
 
 - (IBAction)parkingBrakeChanged:(UISwitch *)sender {
-    [_client writeBoolValue:sender.isOn forKey:kTreeKeyForBrakeParking];
+    [client writeBoolValue:sender.isOn forKey:kTreeKeyForBrakeParking];
 }
 
 #pragma mark UITextFieldDelegate methods
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField != _hostText) return NO;
+    if (textField != hostText) return NO;
 
-    NSString *hostAndPort = _hostText.text;
+    NSString *hostAndPort = hostText.text;
     NSArray *components = [hostAndPort componentsSeparatedByString:@":"];
     if (components.count > 2) return NO;
 
@@ -164,7 +199,7 @@ static const NSInteger kNumberOfFlapsPositions = 7;
     NSInteger port = components.count == 2 ? [components[1] intValue] : kDefaultPort;
 
     [textField resignFirstResponder];
-    [_client bindToHost:host onPort:port];
+    [client bindToHost:host onPort:port];
     return YES;
 }
 
@@ -194,7 +229,7 @@ static const NSInteger kNumberOfFlapsPositions = 7;
 
 - (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didReceiveDoubleValue:(double)doubleValue forKey:(NSString *)key
 {
-    NSTextCheckingResult *match = [self.regexForFlapsSettings firstMatchInString:key options:0 range:NSMakeRange(0, key.length)];
+    NSTextCheckingResult *match = [regexForFlapsSettings firstMatchInString:key options:0 range:NSMakeRange(0, key.length)];
     if (match.numberOfRanges > 1) {
         int index = [[key substringWithRange:[match rangeAtIndex:1]] intValue];
         [flapsSettings setObject:[NSNumber numberWithDouble:doubleValue] forKey:[NSNumber numberWithInt:index]];
@@ -202,8 +237,8 @@ static const NSInteger kNumberOfFlapsPositions = 7;
             self.flapsSettingsRetrieved = YES;
         }
     } else if ([key isEqualToString:kTreeKeyForFirstThrottle]) {
-        [_throttleSlider setValue:doubleValue animated:YES];
-        _throttleSlider.enabled = YES;
+        [throttleSlider setValue:doubleValue animated:YES];
+        throttleSlider.enabled = YES;
     } else {
         NSLog(@"Missing handler for property tree double value of key: %@", key);
     }
@@ -217,7 +252,7 @@ static const NSInteger kNumberOfFlapsPositions = 7;
 - (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didReceiveIntValue:(int)intValue forKey:(NSString *)key
 {
     if ([key isEqualToString:kTreeKeyForCurrentFlapsPosition]) {
-        _flapsSlider.value = intValue;
+        flapsSlider.value = intValue;
         self.flapsPositionRetrieved = YES;
     } else {
         NSLog(@"Missing handler for property tree int value of key: %@", key);
@@ -227,17 +262,17 @@ static const NSInteger kNumberOfFlapsPositions = 7;
 - (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didReceiveBoolValue:(BOOL)boolValue forKey:(NSString *)key
 {
     if ([key isEqualToString:kTreeKeyForGear]) {
-        [_gearSwitch setOn:boolValue animated:YES];
-        _gearSwitch.enabled = YES;
+        [gearSwitch setOn:boolValue animated:YES];
+        gearSwitch.enabled = YES;
     } else if ([key isEqualToString:kTreeKeyForBrakeLeft]) {
-        [_brakeSwitch setOn:boolValue animated:YES];
-        _brakeSwitch.enabled = YES;
+        [brakeSwitch setOn:boolValue animated:YES];
+        brakeSwitch.enabled = YES;
     } else if ([key isEqualToString:kTreeKeyForBrakeParking]) {
-        [_parkingBrakeSwitch setOn:boolValue animated:YES];
-        _parkingBrakeSwitch.enabled = YES;
+        [parkingBrakeSwitch setOn:boolValue animated:YES];
+        parkingBrakeSwitch.enabled = YES;
     } else if ([key isEqualToString:kTreeKeyForFirstReverser]) {
-        [_reverserSwitch setOn:boolValue animated:YES];
-        _reverserSwitch.enabled = YES;
+        [reverserSwitch setOn:boolValue animated:YES];
+        reverserSwitch.enabled = YES;
     } else {
         NSLog(@"Missing handler for property tree bool value of key: %@", key);
     }
