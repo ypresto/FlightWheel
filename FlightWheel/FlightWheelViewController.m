@@ -30,14 +30,17 @@
     __weak IBOutlet UIView *throttleSliderContainer;
     __weak IBOutlet UIProgressView *alieronMeter;
     __weak IBOutlet UIProgressView *elevatorMeter;
-    
+    __weak IBOutlet UIProgressView *rudderMeter;
+
     FGFSPropertyTreeClient *client;
     NSMutableDictionary *flapsSettings;
     CMMotionManager *motionManager;
     double rollCalibrate;
     double pitchCalibrate;
+    double yawCalibrate;
     float elevatorSensitivity;
     float alieronSensitivity;
+    float rudderSensitivity;
 }
 
 static const NSInteger kDefaultPort = 65535;
@@ -51,12 +54,14 @@ static NSString *const kTreeKeyFormatForThrottle = @"/controls/engines/engine[%d
 static NSString *const kTreeKeyFormatForReverser = @"/controls/engines/engine[%d]/reverser";
 static NSString *const kTreeKeyForAileron = @"/controls/flight/aileron";
 static NSString *const kTreeKeyForElevator = @"/controls/flight/elevator";
+static NSString *const kTreeKeyForRudder = @"/controls/flight/rudder";
 static NSString *const kTreeKeyForFlaps = @"/controls/flight/flaps";
 static NSString *const kTreeKeyForCurrentFlapsPosition = @"/sim/flaps/current-setting";
 static NSString *const kTreeKeyFormatForFlapsSettings = @"/sim/flaps/setting[%d]";
 static NSString *const kTreeKeyPatternForFlapsSettings = @"/sim/flaps/setting\\[(\\d+)\\]";
 static const NSInteger kNumberOfEngines = 4;
 static const NSInteger kNumberOfFlapsPositions = 7;
+static const NSInteger kMotionFrequencyHz = 20;
 
 static NSRegularExpression *regexForFlapsSettings;
 
@@ -67,6 +72,7 @@ static NSRegularExpression *regexForFlapsSettings;
     [self setupRegexForFlapsSettings];
     elevatorSensitivity = 2.0f;
     alieronSensitivity = 1.0f;
+    rudderSensitivity = 1.0f;
 
     client = [FGFSPropertyTreeClient new];
     client.delegate = self;
@@ -78,17 +84,23 @@ static NSRegularExpression *regexForFlapsSettings;
     flapsSlider.transform = CGAffineTransformMakeRotation(M_PI);
 
     motionManager = [CMMotionManager new];
-    [motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
+    motionManager.deviceMotionUpdateInterval = 1.0f / kMotionFrequencyHz;
+    [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical toQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
         double elevator = -(motion.attitude.roll - rollCalibrate) / M_PI;
         if (elevator > 1.0) elevator -=2.0; else if (elevator < -1.0) elevator += 2.0;
         elevator = MAX(MIN(elevator * elevatorSensitivity, 1.0), -1.0);
         double alieron = -(motion.attitude.pitch - pitchCalibrate) / M_PI_2;
         if (alieron > 1.0) alieron -=2.0; else if (alieron < -1.0) alieron += 2.0;
         alieron = MAX(MIN(alieron * alieronSensitivity, 1.0), -1.0);
+        double rudder = -(motion.attitude.yaw - yawCalibrate) / M_PI_2;
+        if (rudder > 1.0) rudder -=2.0; else if (rudder < -1.0) rudder += 2.0;
+        rudder = MAX(MIN(rudder * rudderSensitivity, 1.0), -1.0);
         elevatorMeter.progress = (elevator + 1.0) / 2.0;
         alieronMeter.progress = (alieron + 1.0) / 2.0;
+        rudderMeter.progress = (rudder + 1.0) / 2.0;
         [client writeDoubleValue:alieron forKey:kTreeKeyForAileron];
         [client writeDoubleValue:elevator forKey:kTreeKeyForElevator];
+        [client writeDoubleValue:rudder forKey:kTreeKeyForRudder];
     }];
 }
 
@@ -150,6 +162,7 @@ static NSRegularExpression *regexForFlapsSettings;
     CMDeviceMotion *motion = motionManager.deviceMotion;
     rollCalibrate = motion.attitude.roll;
     pitchCalibrate = motion.attitude.pitch;
+    yawCalibrate = motion.attitude.yaw;
 }
 
 - (IBAction)throttleChanged:(UISlider *)sender {
