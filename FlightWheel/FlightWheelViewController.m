@@ -85,7 +85,13 @@ static NSRegularExpression *regexForFlapsSettings;
 
     motionManager = [CMMotionManager new];
     motionManager.deviceMotionUpdateInterval = 1.0f / kMotionFrequencyHz;
+    motionManager.showsDeviceMovementDisplay = YES;
     [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical toQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
+        if (error) {
+            NSLog(@"Error in motion handler, domain: %@, code: %ld", error.domain, (long)error.code);
+            return;
+        }
+
         double elevator = -(motion.attitude.roll - rollCalibrate) / M_PI;
         if (elevator > 1.0) elevator -=2.0; else if (elevator < -1.0) elevator += 2.0;
         elevator = MAX(MIN(elevator * elevatorSensitivity, 1.0), -1.0);
