@@ -86,6 +86,24 @@ static NSRegularExpression *regexForFlapsSettings;
     motionManager = [CMMotionManager new];
     motionManager.deviceMotionUpdateInterval = 1.0f / kMotionFrequencyHz;
     motionManager.showsDeviceMovementDisplay = YES;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopMotionUpdate) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startMotionUpdate) name:UIApplicationWillEnterForegroundNotification object:nil];
+    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
+        [self startMotionUpdate];
+    }
+}
+
+- (void)setupRegexForFlapsSettings
+{
+    if (regexForFlapsSettings) return;
+    NSError *error;
+    regexForFlapsSettings = [NSRegularExpression regularExpressionWithPattern:kTreeKeyPatternForFlapsSettings options:0 error:&error];
+    assert(!error);
+}
+
+- (void)startMotionUpdate
+{
     [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical toQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
         if (error) {
             NSLog(@"Error in motion handler, domain: %@, code: %ld", error.domain, (long)error.code);
@@ -110,12 +128,9 @@ static NSRegularExpression *regexForFlapsSettings;
     }];
 }
 
-- (void)setupRegexForFlapsSettings
+- (void)stopMotionUpdate
 {
-    if (regexForFlapsSettings) return;
-    NSError *error;
-    regexForFlapsSettings = [NSRegularExpression regularExpressionWithPattern:kTreeKeyPatternForFlapsSettings options:0 error:&error];
-    assert(!error);
+    [motionManager stopDeviceMotionUpdates];
 }
 
 - (void)requestFlapsSettings
