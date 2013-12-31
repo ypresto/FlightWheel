@@ -18,8 +18,7 @@ typedef enum ReceiveDataTypeTag : char {
     ReceiveDataTypeBool   = 'B',
 } ReceiveDataType;
 
-@implementation FGFSPropertyTreeClient
-{
+@implementation FGFSPropertyTreeClient {
     CHCircularBufferQueue *queue;
     BOOL isReady;
 }
@@ -28,8 +27,7 @@ static const NSTimeInterval kSocketTimeout = 3.0;
 static const NSUInteger kSocketMaxLength = 102400u;
 static const NSUInteger kQueueCapacity = 4096u;
 
-- (void)bindToHost:(NSString *)host onPort:(uint16_t)port
-{
+- (void)bindToHost:(NSString *)host onPort:(uint16_t)port {
     [self unbind];
 
     _socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
@@ -41,41 +39,34 @@ static const NSUInteger kQueueCapacity = 4096u;
     }
 }
 
-- (void)unbind
-{
+- (void)unbind {
     [_socket disconnect];
     _socket = nil;
     queue = nil;
     isReady = NO;
 }
 
-- (void)requestStringValueForKey:(NSString *)key
-{
+- (void)requestStringValueForKey:(NSString *)key {
     [self requestValueForKey:key receiveDataType:ReceiveDataTypeString];
 }
 
-- (void)requestDoubleValueForKey:(NSString *)key
-{
+- (void)requestDoubleValueForKey:(NSString *)key {
     [self requestValueForKey:key receiveDataType:ReceiveDataTypeDouble];
 }
 
-- (void)requestLongValueForKey:(NSString *)key
-{
+- (void)requestLongValueForKey:(NSString *)key {
     [self requestValueForKey:key receiveDataType:ReceiveDataTypeLong];
 }
 
-- (void)requestIntValueForKey:(NSString *)key
-{
+- (void)requestIntValueForKey:(NSString *)key {
     [self requestValueForKey:key receiveDataType:ReceiveDataTypeInt];
 }
 
-- (void)requestBoolValueForKey:(NSString *)key
-{
+- (void)requestBoolValueForKey:(NSString *)key {
     [self requestValueForKey:key receiveDataType:ReceiveDataTypeBool];
 }
 
-- (void)requestValueForKey:(NSString *)key receiveDataType:(ReceiveDataType)receiveDataType
-{
+- (void)requestValueForKey:(NSString *)key receiveDataType:(ReceiveDataType)receiveDataType {
     if (!isReady) return;
 
     NSData *data = [[NSString stringWithFormat:@"get %@\r\n", key] dataUsingEncoding:NSUTF8StringEncoding];
@@ -85,8 +76,7 @@ static const NSUInteger kQueueCapacity = 4096u;
     [_socket readDataToData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:kSocketTimeout maxLength:kSocketMaxLength tag:receiveDataType];
 }
 
-- (void)writeStringValue:(NSString *)stringValue forKey:(NSString *)key
-{
+- (void)writeStringValue:(NSString *)stringValue forKey:(NSString *)key {
     if (!isReady) return;
 
     // typedef simgear::PropertyObject<std::string> SGPropObjString;
@@ -94,32 +84,27 @@ static const NSUInteger kQueueCapacity = 4096u;
     [_socket writeData:data withTimeout:kSocketTimeout tag:0];
 }
 
-- (void)writeDoubleValue:(double)doubleValue forKey:(NSString *)key
-{
+- (void)writeDoubleValue:(double)doubleValue forKey:(NSString *)key {
     // typedef simgear::PropertyObject<double> SGPropObjDouble;
     [self writeStringValue:[NSString stringWithFormat:@"%f", doubleValue] forKey:key];
 }
 
-- (void)writeLongValue:(long)longValue forKey:(NSString *)key
-{
+- (void)writeLongValue:(long)longValue forKey:(NSString *)key {
     // typedef simgear::PropertyObject<long> SGPropObjInt;
     [self writeStringValue:[NSString stringWithFormat:@"%ld", longValue] forKey:key];
 }
 
-- (void)writeIntValue:(int)intValue forKey:(NSString *)key
-{
+- (void)writeIntValue:(int)intValue forKey:(NSString *)key {
     // typedef simgear::PropertyObject<long> SGPropObjInt;
     [self writeStringValue:[NSString stringWithFormat:@"%d", intValue] forKey:key];
 }
 
-- (void)writeBoolValue:(BOOL)boolValue forKey:(NSString *)key
-{
+- (void)writeBoolValue:(BOOL)boolValue forKey:(NSString *)key {
     // typedef simgear::PropertyObject<bool> SGPropObjBool;
     [self writeIntValue:(boolValue ? 1 : 0) forKey:key];
 }
 
-- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
-{
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     if (sock != _socket) return;
 
     [_socket writeData:[@"data\r\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:kSocketTimeout tag:0];
@@ -129,8 +114,7 @@ static const NSUInteger kQueueCapacity = 4096u;
     [_delegate propertyTreeClient:self didBindToHost:_socket.connectedHost onPort:_socket.connectedPort];
 }
 
-- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
-{
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     if (sock != _socket) return;
 
     NSString *key = [queue firstObject]; [queue removeFirstObject];
@@ -156,8 +140,7 @@ static const NSUInteger kQueueCapacity = 4096u;
 
 - (NSTimeInterval)socket:(GCDAsyncSocket *)sock shouldTimeoutReadWithTag:(long)tag
                  elapsed:(NSTimeInterval)elapsed
-               bytesDone:(NSUInteger)length
-{
+               bytesDone:(NSUInteger)length {
     if (sock != _socket) return 0;
     [_delegate propertyTreeClientDidTimeout:self];
     return 0;
@@ -165,15 +148,13 @@ static const NSUInteger kQueueCapacity = 4096u;
 
 - (NSTimeInterval)socket:(GCDAsyncSocket *)sock shouldTimeoutWriteWithTag:(long)tag
                  elapsed:(NSTimeInterval)elapsed
-               bytesDone:(NSUInteger)length
-{
+               bytesDone:(NSUInteger)length {
     if (sock != _socket) return 0;
     [_delegate propertyTreeClientDidTimeout:self];
     return 0;
 }
 
-- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
-{
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     [_delegate propertyTreeClientDidDisconnect:self];
     if (sock != _socket) return;
     [self unbind];

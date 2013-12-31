@@ -38,8 +38,7 @@ static NSString *const kTreeKeyPatternForFlapsSettings = @"/sim/flaps/setting\\[
 
 @end
 
-@implementation FlightWheelViewController
-{
+@implementation FlightWheelViewController {
     __weak IBOutlet UITextField *hostText;
     __weak IBOutlet UISwitch *gearSwitch;
     __weak IBOutlet UISwitch *brakeSwitch;
@@ -65,8 +64,7 @@ static NSString *const kTreeKeyPatternForFlapsSettings = @"/sim/flaps/setting\\[
 
 static NSRegularExpression *regexForFlapsSettings;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 
     [self setupRegexForFlapsSettings];
@@ -94,16 +92,14 @@ static NSRegularExpression *regexForFlapsSettings;
     }
 }
 
-- (void)setupRegexForFlapsSettings
-{
+- (void)setupRegexForFlapsSettings {
     if (regexForFlapsSettings) return;
     NSError *error;
     regexForFlapsSettings = [NSRegularExpression regularExpressionWithPattern:kTreeKeyPatternForFlapsSettings options:0 error:&error];
     assert(!error);
 }
 
-- (void)startMotionUpdate
-{
+- (void)startMotionUpdate {
     [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical toQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
         if (error) {
             NSLog(@"Error in motion handler, domain: %@, code: %ld", error.domain, (long)error.code);
@@ -130,13 +126,11 @@ static NSRegularExpression *regexForFlapsSettings;
     }];
 }
 
-- (void)stopMotionUpdate
-{
+- (void)stopMotionUpdate {
     [motionManager stopDeviceMotionUpdates];
 }
 
-- (void)requestFlapsSettings
-{
+- (void)requestFlapsSettings {
     flapsSlider.enabled = NO;
     flapsSettings = [NSMutableDictionary dictionaryWithCapacity:kNumberOfFlapsPositions];
     for (int i = 0; i < kNumberOfFlapsPositions; i++) {
@@ -144,8 +138,7 @@ static NSRegularExpression *regexForFlapsSettings;
     }
 }
 
-- (void)requestInitialValues
-{
+- (void)requestInitialValues {
     gearSwitch.enabled = NO;
     brakeSwitch.enabled = NO;
     parkingBrakeSwitch.enabled = NO;
@@ -160,21 +153,18 @@ static NSRegularExpression *regexForFlapsSettings;
     [client requestIntValueForKey:kTreeKeyForCurrentFlapsPosition];
 }
 
-- (void)updateFlapsSliderEnabled
-{
+- (void)updateFlapsSliderEnabled {
     flapsSlider.enabled = _flapsPositionRetrieved && _flapsSettingsRetrieved;
 }
 
 #pragma mark Custom getter/setter
 
-- (void)setFlapsSettingsRetrieved:(BOOL)flapsSettingsRetrieved
-{
+- (void)setFlapsSettingsRetrieved:(BOOL)flapsSettingsRetrieved {
     _flapsSettingsRetrieved = flapsSettingsRetrieved;
     [self updateFlapsSliderEnabled];
 }
 
-- (void)setFlapsPositionRetrieved:(BOOL)flapsPositionRetrieved
-{
+- (void)setFlapsPositionRetrieved:(BOOL)flapsPositionRetrieved {
     _flapsPositionRetrieved = flapsPositionRetrieved;
     [self updateFlapsSliderEnabled];
 }
@@ -241,30 +231,25 @@ static NSRegularExpression *regexForFlapsSettings;
 
 #pragma mark FGFSPropertyTreeClientDelegate methods
 
-- (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didBindToHost:(NSString *)host onPort:(uint16_t)port
-{
+- (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didBindToHost:(NSString *)host onPort:(uint16_t)port {
     NSLog(@"Connected to %@:%d.", host, port);
     [self requestFlapsSettings];
     [self requestInitialValues];
 }
 
-- (void)propertyTreeClientDidDisconnect:(FGFSPropertyTreeClient *)client
-{
+- (void)propertyTreeClientDidDisconnect:(FGFSPropertyTreeClient *)client {
     NSLog(@"Disconnected.");
 }
 
-- (void)propertyTreeClientDidTimeout:(FGFSPropertyTreeClient *)client
-{
+- (void)propertyTreeClientDidTimeout:(FGFSPropertyTreeClient *)client {
     NSLog(@"Timeout occured.");
 }
 
-- (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didReceiveStringValue:(NSString *)stringValue forKey:(NSString *)key
-{
+- (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didReceiveStringValue:(NSString *)stringValue forKey:(NSString *)key {
     NSLog(@"Missing handler for property tree string value of key: %@", key);
 }
 
-- (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didReceiveDoubleValue:(double)doubleValue forKey:(NSString *)key
-{
+- (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didReceiveDoubleValue:(double)doubleValue forKey:(NSString *)key {
     NSTextCheckingResult *match = [regexForFlapsSettings firstMatchInString:key options:0 range:NSMakeRange(0, key.length)];
     if (match.numberOfRanges > 1) {
         int index = [[key substringWithRange:[match rangeAtIndex:1]] intValue];
@@ -280,13 +265,11 @@ static NSRegularExpression *regexForFlapsSettings;
     }
 }
 
-- (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didReceiveLongValue:(long)longValue forKey:(NSString *)key
-{
+- (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didReceiveLongValue:(long)longValue forKey:(NSString *)key {
     NSLog(@"Missing handler for property tree long value of key: %@", key);
 }
 
-- (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didReceiveIntValue:(int)intValue forKey:(NSString *)key
-{
+- (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didReceiveIntValue:(int)intValue forKey:(NSString *)key {
     if ([key isEqualToString:kTreeKeyForCurrentFlapsPosition]) {
         flapsSlider.value = intValue;
         self.flapsPositionRetrieved = YES;
@@ -295,8 +278,7 @@ static NSRegularExpression *regexForFlapsSettings;
     }
 }
 
-- (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didReceiveBoolValue:(BOOL)boolValue forKey:(NSString *)key
-{
+- (void)propertyTreeClient:(FGFSPropertyTreeClient *)client didReceiveBoolValue:(BOOL)boolValue forKey:(NSString *)key {
     if ([key isEqualToString:kTreeKeyForGear]) {
         [gearSwitch setOn:boolValue animated:YES];
         gearSwitch.enabled = YES;

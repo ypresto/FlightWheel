@@ -14,24 +14,20 @@
 
 @end
 
-@implementation FGFSPropertyTreeClientTests
-{
+@implementation FGFSPropertyTreeClientTests {
     FGFSPropertyTreeClient *client;
 }
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
     client = [[FGFSPropertyTreeClient alloc] init];
 }
 
-- (void)tearDown
-{
+- (void)tearDown {
     [super tearDown];
 }
 
-- (id)setupRequestValueForKeySocketMockWithKey:(NSString *)key typePrefix:(long)typePrefix
-{
+- (id)setupRequestValueForKeySocketMockWithKey:(NSString *)key typePrefix:(long)typePrefix {
     id socketMock = [OCMockObject mockForClass:[GCDAsyncSocket class]];
 
     [[socketMock expect] writeData:[[NSString stringWithFormat:@"get %@\r\n", key] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:3.0f tag:0];
@@ -41,8 +37,7 @@
     return socketMock;
 }
 
-- (void)testRequestStringValueForKey
-{
+- (void)testRequestStringValueForKey {
     NSString *key = @"/sim/presets/airport-id";
     NSString *value = @"KBUR";
     char typePrefix = 'S';
@@ -61,8 +56,7 @@
     [delegateMock verify];
 }
 
-- (void)testRequestDoubleValueForKey
-{
+- (void)testRequestDoubleValueForKey {
     NSString *key = @"/position/longitude-deg";
     double value = 12.3456;
     char typePrefix = 'D';
@@ -81,8 +75,7 @@
     [delegateMock verify];
 }
 
-- (void)testRequestLongValueForKey
-{
+- (void)testRequestLongValueForKey {
     NSString *key = @"/long-value-test";
     long value = LONG_MAX;
     char typePrefix = 'L';
@@ -101,8 +94,7 @@
     [delegateMock verify];
 }
 
-- (void)testRequestIntValueForKey
-{
+- (void)testRequestIntValueForKey {
     NSString *key = @"/controls/engines/engine/magneto";
     int value = 123;
     char typePrefix = 'I';
@@ -121,8 +113,7 @@
     [delegateMock verify];
 }
 
-- (void)testRequestBoolValueForKey
-{
+- (void)testRequestBoolValueForKey {
     NSString *key = @"/bool-value-test";
     BOOL value = YES;
     char typePrefix = 'B';
@@ -141,8 +132,7 @@
     [delegateMock verify];
 }
 
-- (void)testWriteStringValueForKey
-{
+- (void)testWriteStringValueForKey {
     NSString *key = @"/sim/presets/airport-id";
     NSString *value = @"KBUR";
 
