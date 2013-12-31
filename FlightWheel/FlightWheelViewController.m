@@ -11,6 +11,26 @@
 #import "FGFSPropertyTreeClient.h"
 #import <CoreMotion/CoreMotion.h>
 
+static const NSInteger kDefaultPort = 65535;
+static const NSInteger kNumberOfEngines = 4;
+static const NSInteger kNumberOfFlapsPositions = 7;
+static const NSInteger kMotionFrequencyHz = 20;
+static NSString *const kTreeKeyForGear = @"/controls/gear/gear-down";
+static NSString *const kTreeKeyForBrakeLeft = @"/controls/gear/brake-left";
+static NSString *const kTreeKeyForBrakeRight = @"/controls/gear/brake-right";
+static NSString *const kTreeKeyForBrakeParking = @"/controls/gear/brake-parking";
+static NSString *const kTreeKeyForFirstThrottle = @"/controls/engines/engine/throttle";
+static NSString *const kTreeKeyForFirstReverser = @"/controls/engines/engine/reverser";
+static NSString *const kTreeKeyFormatForThrottle = @"/controls/engines/engine[%d]/throttle";
+static NSString *const kTreeKeyFormatForReverser = @"/controls/engines/engine[%d]/reverser";
+static NSString *const kTreeKeyForAileron = @"/controls/flight/aileron";
+static NSString *const kTreeKeyForElevator = @"/controls/flight/elevator";
+static NSString *const kTreeKeyForRudder = @"/controls/flight/rudder";
+static NSString *const kTreeKeyForFlaps = @"/controls/flight/flaps";
+static NSString *const kTreeKeyForCurrentFlapsPosition = @"/sim/flaps/current-setting";
+static NSString *const kTreeKeyFormatForFlapsSettings = @"/sim/flaps/setting[%d]";
+static NSString *const kTreeKeyPatternForFlapsSettings = @"/sim/flaps/setting\\[(\\d+)\\]";
+
 @interface FlightWheelViewController () <FGFSPropertyTreeClientDelegate, UITextFieldDelegate, UIAccelerometerDelegate>
 
 @property (nonatomic) BOOL flapsSettingsRetrieved;
@@ -28,8 +48,8 @@
     __weak IBOutlet UISlider *throttleSlider;
     __weak IBOutlet UISlider *flapsSlider;
     __weak IBOutlet UIView *throttleSliderContainer;
-    __weak IBOutlet UIProgressView *alieronMeter;
     __weak IBOutlet UIProgressView *elevatorMeter;
+    __weak IBOutlet UIProgressView *alieronMeter;
     __weak IBOutlet UIProgressView *rudderMeter;
 
     FGFSPropertyTreeClient *client;
@@ -42,26 +62,6 @@
     float alieronSensitivity;
     float rudderSensitivity;
 }
-
-static const NSInteger kDefaultPort = 65535;
-static NSString *const kTreeKeyForGear = @"/controls/gear/gear-down";
-static NSString *const kTreeKeyForBrakeLeft = @"/controls/gear/brake-left";
-static NSString *const kTreeKeyForBrakeRight = @"/controls/gear/brake-right";
-static NSString *const kTreeKeyForBrakeParking = @"/controls/gear/brake-parking";
-static NSString *const kTreeKeyForFirstThrottle = @"/controls/engines/engine/throttle";
-static NSString *const kTreeKeyForFirstReverser = @"/controls/engines/engine/reverser";
-static NSString *const kTreeKeyFormatForThrottle = @"/controls/engines/engine[%d]/throttle";
-static NSString *const kTreeKeyFormatForReverser = @"/controls/engines/engine[%d]/reverser";
-static NSString *const kTreeKeyForAileron = @"/controls/flight/aileron";
-static NSString *const kTreeKeyForElevator = @"/controls/flight/elevator";
-static NSString *const kTreeKeyForRudder = @"/controls/flight/rudder";
-static NSString *const kTreeKeyForFlaps = @"/controls/flight/flaps";
-static NSString *const kTreeKeyForCurrentFlapsPosition = @"/sim/flaps/current-setting";
-static NSString *const kTreeKeyFormatForFlapsSettings = @"/sim/flaps/setting[%d]";
-static NSString *const kTreeKeyPatternForFlapsSettings = @"/sim/flaps/setting\\[(\\d+)\\]";
-static const NSInteger kNumberOfEngines = 4;
-static const NSInteger kNumberOfFlapsPositions = 7;
-static const NSInteger kMotionFrequencyHz = 20;
 
 static NSRegularExpression *regexForFlapsSettings;
 
@@ -98,8 +98,8 @@ static NSRegularExpression *regexForFlapsSettings;
         elevatorMeter.progress = (elevator + 1.0) / 2.0;
         alieronMeter.progress = (alieron + 1.0) / 2.0;
         rudderMeter.progress = (rudder + 1.0) / 2.0;
-        [client writeDoubleValue:alieron forKey:kTreeKeyForAileron];
         [client writeDoubleValue:elevator forKey:kTreeKeyForElevator];
+        [client writeDoubleValue:alieron forKey:kTreeKeyForAileron];
         [client writeDoubleValue:rudder forKey:kTreeKeyForRudder];
     }];
 }
