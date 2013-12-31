@@ -48,8 +48,8 @@ static NSString *const kTreeKeyPatternForFlapsSettings = @"/sim/flaps/setting\\[
     __weak IBOutlet UISlider *throttleSlider;
     __weak IBOutlet UISlider *flapsSlider;
     __weak IBOutlet UIView *throttleSliderContainer;
-    __weak IBOutlet UIProgressView *elevatorMeter;
     __weak IBOutlet UIProgressView *alieronMeter;
+    __weak IBOutlet UIProgressView *elevatorMeter;
     __weak IBOutlet UIProgressView *rudderMeter;
 
     FGFSPropertyTreeClient *client;
@@ -58,8 +58,8 @@ static NSString *const kTreeKeyPatternForFlapsSettings = @"/sim/flaps/setting\\[
     double rollCalibrate;
     double pitchCalibrate;
     double yawCalibrate;
-    float elevatorSensitivity;
     float alieronSensitivity;
+    float elevatorSensitivity;
     float rudderSensitivity;
 }
 
@@ -70,9 +70,9 @@ static NSRegularExpression *regexForFlapsSettings;
     [super viewDidLoad];
 
     [self setupRegexForFlapsSettings];
-    elevatorSensitivity = 2.0f;
-    alieronSensitivity = 1.0f;
-    rudderSensitivity = 1.0f;
+    alieronSensitivity = 3.0f;
+    elevatorSensitivity = 3.0f;
+    rudderSensitivity = 3.0f;
 
     client = [FGFSPropertyTreeClient new];
     client.delegate = self;
@@ -110,20 +110,22 @@ static NSRegularExpression *regexForFlapsSettings;
             return;
         }
 
+        // Map 360 degree to (-1.0 -> +1.0 - calibrationValue)
+        double alieron = -(motion.attitude.pitch - pitchCalibrate) / M_PI;
         double elevator = -(motion.attitude.roll - rollCalibrate) / M_PI;
-        if (elevator > 1.0) elevator -=2.0; else if (elevator < -1.0) elevator += 2.0;
-        elevator = MAX(MIN(elevator * elevatorSensitivity, 1.0), -1.0);
-        double alieron = -(motion.attitude.pitch - pitchCalibrate) / M_PI_2;
+        double rudder = -(motion.attitude.yaw - yawCalibrate) / M_PI;
+        // Circulate values which out of range
         if (alieron > 1.0) alieron -=2.0; else if (alieron < -1.0) alieron += 2.0;
-        alieron = MAX(MIN(alieron * alieronSensitivity, 1.0), -1.0);
-        double rudder = -(motion.attitude.yaw - yawCalibrate) / M_PI_2;
+        if (elevator > 1.0) elevator -=2.0; else if (elevator < -1.0) elevator += 2.0;
         if (rudder > 1.0) rudder -=2.0; else if (rudder < -1.0) rudder += 2.0;
+        alieron = MAX(MIN(alieron * alieronSensitivity, 1.0), -1.0);
+        elevator = MAX(MIN(elevator * elevatorSensitivity, 1.0), -1.0);
         rudder = MAX(MIN(rudder * rudderSensitivity, 1.0), -1.0);
-        elevatorMeter.progress = (elevator + 1.0) / 2.0;
         alieronMeter.progress = (alieron + 1.0) / 2.0;
+        elevatorMeter.progress = (elevator + 1.0) / 2.0;
         rudderMeter.progress = (rudder + 1.0) / 2.0;
-        [client writeDoubleValue:elevator forKey:kTreeKeyForElevator];
         [client writeDoubleValue:alieron forKey:kTreeKeyForAileron];
+        [client writeDoubleValue:elevator forKey:kTreeKeyForElevator];
         [client writeDoubleValue:rudder forKey:kTreeKeyForRudder];
     }];
 }
