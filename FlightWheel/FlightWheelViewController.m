@@ -11,10 +11,11 @@
 #import "FGFSPropertyTreeClient.h"
 #import <CoreMotion/CoreMotion.h>
 
-static const NSInteger kDefaultPort = 65535;
+static const NSInteger kDefaultPort = 5401;
 static const NSInteger kNumberOfEngines = 4;
 static const NSInteger kNumberOfFlapsPositions = 7;
 static const NSInteger kMotionFrequencyHz = 20;
+static NSString *const kUserDefaultKeyForHostText = @"hostText";
 static NSString *const kTreeKeyForGear = @"/controls/gear/gear-down";
 static NSString *const kTreeKeyForBrakeLeft = @"/controls/gear/brake-left";
 static NSString *const kTreeKeyForBrakeRight = @"/controls/gear/brake-right";
@@ -67,6 +68,8 @@ static NSRegularExpression *regexForFlapsSettings;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    NSUserDefaults *defaults = [NSUserDefaults new];
+
     [self setupRegexForFlapsSettings];
     alieronSensitivity = 3.0f;
     elevatorSensitivity = 3.0f;
@@ -75,6 +78,7 @@ static NSRegularExpression *regexForFlapsSettings;
     client = [FGFSPropertyTreeClient new];
     client.delegate = self;
     hostText.delegate = self;
+    hostText.text = [defaults objectForKey:kUserDefaultKeyForHostText];
 
     flapsSlider.maximumValue = kNumberOfFlapsPositions - 1;
 
@@ -226,6 +230,14 @@ static NSRegularExpression *regexForFlapsSettings;
 
     [textField resignFirstResponder];
     [client bindToHost:host onPort:port];
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    if (textField != hostText) return NO;
+    NSUserDefaults *defaults = [NSUserDefaults new];
+    [defaults setObject:textField.text forKey:kUserDefaultKeyForHostText];
+    [defaults synchronize];
     return YES;
 }
 
