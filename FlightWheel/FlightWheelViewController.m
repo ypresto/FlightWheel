@@ -34,8 +34,8 @@ static NSString *const kTreeKeyPatternForFlapsSettings = @"/sim/flaps/setting\\[
 
 @interface FlightWheelViewController () <FGFSPropertyTreeClientDelegate, UITextFieldDelegate, UIAccelerometerDelegate>
 
-@property (nonatomic) BOOL flapsSettingsRetrieved;
-@property (nonatomic) BOOL flapsPositionRetrieved;
+@property(nonatomic) BOOL flapsSettingsRetrieved;
+@property(nonatomic) BOOL flapsPositionRetrieved;
 
 @end
 

@@ -12,8 +12,7 @@
 
 @interface FlightWheelAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-
-@property (strong, nonatomic) FlightWheelViewController *viewController;
+@property(strong, nonatomic) UIWindow *window;
+@property(strong, nonatomic) FlightWheelViewController *viewController;
 
 @end

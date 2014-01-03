@@ -29,8 +29,8 @@
 
 @interface FGFSPropertyTreeClient : NSObject <GCDAsyncSocketDelegate>
 
-@property (nonatomic, weak) id<FGFSPropertyTreeClientDelegate> delegate;
-@property (nonatomic, retain) GCDAsyncSocket *socket;
+@property(nonatomic, weak) id<FGFSPropertyTreeClientDelegate> delegate;
+@property(nonatomic, retain) GCDAsyncSocket *socket;
 
 - (void)bindToHost:(NSString *)host onPort:(uint16_t)port;
 - (void)unbind;
